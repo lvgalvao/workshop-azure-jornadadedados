@@ -84,7 +84,6 @@
 3. **Visão Geral de Vários Tipos de Banco de Dados:**
    - **Azure SQL Database:** Banco de dados relacional gerenciado.
    - **Azure Cosmos DB:** Banco de dados NoSQL globalmente distribuído.
-   - **Azure Synapse Analytics:** Plataforma unificada para análise em grande escala.
    
    **Motivação para Estudo:** A diversidade de bancos de dados e serviços incentiva a aprender novas tecnologias e arquiteturas.
 
