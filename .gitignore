@@ -1,1 +1,3 @@
-minhamaquina_key.pem
+.env
+.venv
+.export

@@ -4,6 +4,11 @@
 ### Resumo
 Este workshop tem como objetivo fornecer uma introdução prática ao uso da Microsoft Azure, abordando desde a criação de contas e controle de custos até a implementação de serviços como Azure VMs, Azure Serverless e Azure Active Directory. Os participantes irão aprender a navegar na interface do Azure, criar e gerenciar recursos, além de desenvolver projetos práticos que envolvem ETL e aplicativos web escaláveis.
 
+- Como fazer o deploy da minha aplicação
+- Mostrar como desenvolver uma ETL Extração API com AzureVMs
+- O Azure é mais do que isso
+- Serviços que possibilitam criar aplicações modernas
+
 ### O que é Cloud
 Revisaremos os conceitos fundamentais de Cloud Computing, destacando as vantagens da escalabilidade, custo-eficiência, acessibilidade e segurança oferecidas pela nuvem. Discutiremos também o que não constitui uma solução de cloud, como a diferença entre cloud e data centers on-premise, além de mitigar a percepção de que a nuvem é sempre a opção mais barata.
 
