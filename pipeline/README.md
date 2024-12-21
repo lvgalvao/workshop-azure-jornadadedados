@@ -77,17 +77,7 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io
 
 #### 7. Verificar a Instalação do Docker
 
-Reinicie a VM para garantir que todas as alterações entrem em vigor.
-
-```bash
-sudo reboot
-```
-
 Após reiniciar, reconecte-se via SSH e execute:
-
-```bash
-docker run hello-world
-```
 
 Este comando verifica se o Docker foi instalado corretamente exibindo uma mensagem de confirmação.
 
@@ -97,6 +87,16 @@ Para evitar a necessidade de usar `sudo` com comandos Docker, adicione seu usuá
 
 ```bash
 sudo usermod -aG docker $USER
+```
+
+Reinicie a VM para garantir que todas as alterações entrem em vigor.
+
+```bash
+sudo reboot
+```
+
+```bash
+docker run hello-world
 ```
 
 Depois, faça logout e login novamente ou reinicie a sessão SSH para que as alterações tenham efeito.
@@ -123,6 +123,14 @@ docker-compose --version
 ##### b. Construir e Rodar os Contêineres
 
 No diretório raiz do projeto (onde está o `docker-compose.yml`), execute:
+
+```bash
+touch .env
+```
+
+```
+vi .env
+```
 
 ```bash
 docker-compose up -d
