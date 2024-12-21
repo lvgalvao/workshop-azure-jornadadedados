@@ -106,7 +106,7 @@ Essas tags ajudarão na organização e monitoramento dos recursos do workshop, 
    - Clique em **Criar um Recurso** e procure por **Storage Account**.
    - Configure os seguintes campos:
      - **Assinatura e Grupo de Recursos:** Escolha a assinatura e crie ou selecione um grupo de recursos.
-     - **Nome:** Escolha um nome único (exemplo: `meu-storage-dados`).
+     - **Nome:** Escolha um nome único (exemplo: `Workshop-Cloud-Dados`).
      - **Região:** Escolha a região mais próxima dos usuários ou do processamento de dados.
      - **Performance:** Escolha entre Standard (mais barato) ou Premium (melhor performance).
      - **Redundância:** Opções incluem:
@@ -123,16 +123,33 @@ Essas tags ajudarão na organização e monitoramento dos recursos do workshop, 
 
 ---
 
-### 4. Trabalhando com Containers no Azure Blob Storage
+### 4. Criando um Website estático
 
-1. **Criando um Container:**
-   - Acesse a conta de armazenamento criada.
-   - Na aba **Containers**, clique em **+ Container**.
-   - Nomeie o container (ex: `dados-brutos`) e configure permissões:
-     - **Privado:** Apenas o proprietário da conta pode acessar.
-     - **Público:** Permite leitura anônima.
+1. **Em Data Management**
+    - Data Management, clique em **Static Website** para adicionar arquivos.
+    - Clique em **Enabled**
+
+Index document name
+```bash
+index.html
+```
+
+Error document path
+```bash
+404.html
+```
+
+Após isso vai receber sua Primary endpoint
+
+[cloudstorageworkshop](https://cloudstorageworkshop.z13.web.core.windows.net/)
+
+1. **Em data storage**
+   - Vai para o $web
 
 2. **Upload de Arquivos:**
+   
+   - Vamos criar o Index e o error 404.html
+   - Vamos tirar o Print da Foto
    - Dentro do container, clique em **Upload** para adicionar arquivos.
 
 3. **Acessando Arquivos Publicamente:**
@@ -142,95 +159,7 @@ Essas tags ajudarão na organização e monitoramento dos recursos do workshop, 
    - Vá até a aba **Lifecycle Management**.
    - Configure regras para mover dados entre camadas (ex: mover para Archive após 30 dias).
 
----
-
-### 5. Recursos Avançados do Blob Storage
-
-1. **Criptografia:**
-   - Dados armazenados no Blob Storage são criptografados por padrão com AES-256.
-
-2. **Redundância:**
-   - Opções de redundância garantem alta disponibilidade:
-     - **LRS:** Redundância local em um único data center.
-     - **GRS:** Replicação entre regiões geograficamente distantes.
-
-3. **Logging e Monitoramento:**
-   - Use **Azure Monitor** para rastrear acessos e modificações nos dados.
-
-4. **Event Grid:**
-   - Configure eventos para disparar ações automatizadas, como notificações ou funções Azure.
-
----
-
-### 6. Comparação Prática: S3 x Blob Storage
-
-| Operação                  | AWS S3 Command                        | Azure Blob Storage Command               |
-|---------------------------|----------------------------------------|------------------------------------------|
-| **Criar Bucket/Container**| `aws s3 mb s3://bucket-name`          | `az storage container create`            |
-| **Upload de Arquivo**     | `aws s3 cp file.txt s3://bucket-name` | `az storage blob upload`                 |
-| **Download de Arquivo**   | `aws s3 cp s3://bucket-name/file.txt` | `az storage blob download`               |
-| **Definir ACL**           | Via Bucket Policy                     | Via Blob Access Policy                   |
-| **Configuração Lifecycle**| `aws s3api put-bucket-lifecycle`      | Configuração via Portal ou CLI           |
-
----
-
-### 7. Exemplo Prático: Interagindo com o Blob Storage via Python
-
-1. **Instalando o SDK do Azure:**
-   ```bash
-   pip install azure-storage-blob
-   ```
-
-2. **Código para Upload de Arquivos:**
-   ```python
-   from azure.storage.blob import BlobServiceClient
-
-   # Configuração
-   connection_string = "sua_connection_string"
-   blob_service_client = BlobServiceClient.from_connection_string(connection_string)
-
-   # Container e arquivo
-   container_name = "dados-brutos"
-   file_name = "arquivo.csv"
-
-   # Upload
-   blob_client = blob_service_client.get_blob_client(container=container_name, blob=file_name)
-   with open(file_name, "rb") as data:
-       blob_client.upload_blob(data)
-
-   print(f"Arquivo {file_name} enviado para {container_name}.")
-   ```
-
-3. **Código para Download de Arquivos:**
-   ```python
-   # Download do Blob
-   download_file_name = "downloaded_arquivo.csv"
-   with open(download_file_name, "wb") as download_file:
-       download_file.write(blob_client.download_blob().readall())
-
-   print(f"Arquivo baixado como {download_file_name}.")
-   ```
-
----
-
-### 8. Casos de Uso do Blob Storage
-
-1. **Data Lake no Azure:**
-   - Combine Blob Storage com **Azure Data Lake** para criar um armazenamento escalável para dados brutos.
-   - Integre com **Azure Data Factory** para pipelines ETL.
-
-2. **Machine Learning:**
-   - Use datasets armazenados no Blob Storage em **Azure Machine Learning** para treinar modelos.
-
-3. **Arquivamento:**
-   - Configure camadas Archive para dados que precisam ser retidos a longo prazo.
-
-4. **Hospedagem de Sites Estáticos:**
-   - Use Azure Blob Storage para hospedar páginas HTML simples.
-
----
-
 ### **Conclusão**
 O Azure Blob Storage é uma alternativa poderosa e escalável ao Amazon S3, oferecendo funcionalidades equivalentes com integração nativa ao ecossistema do Azure. O aprendizado e adaptação de conceitos entre AWS e Azure são essenciais para profissionais de Cloud e Engenharia de Dados, garantindo flexibilidade em projetos multicloud.
 
-#### Ver agora banco de dados
+#### Olhando mais detalhes do 
