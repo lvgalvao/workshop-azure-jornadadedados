@@ -1,6 +1,6 @@
 import streamlit as st
+import pyodbc
 import pandas as pd
-from sqlalchemy import create_engine
 from azure.identity import DefaultAzureCredential
 from azure.keyvault.secrets import SecretClient
 
@@ -8,10 +8,7 @@ from azure.keyvault.secrets import SecretClient
 KEY_VAULT_URL = "https://azurekeyvaultworkshop.vault.azure.net/"
 SERVER = "workshopazuredatavase.database.windows.net"
 DATABASE = "bitcoin_database"
-DRIVER = "ODBC Driver 18 for SQL Server"
-
-# Configuração da página (primeiro comando Streamlit)
-st.set_page_config(page_title="Dashboard de Preços do Bitcoin", layout="wide")
+DRIVER = "{ODBC Driver 18 for SQL Server}"
 
 # Função para buscar segredos do Azure Key Vault
 def get_secrets_from_key_vault():
@@ -32,46 +29,36 @@ def ler_dados_sqlserver():
         if not sql_username or not sql_password:
             return pd.DataFrame()
 
-        # Configurar conexão SQLAlchemy
-        connection_string = (
-            f"mssql+pyodbc://{sql_username}:{sql_password}@{SERVER}/{DATABASE}?driver={DRIVER.replace(' ', '+')}"
+        conn = pyodbc.connect(
+            f"DRIVER={DRIVER};SERVER={SERVER};PORT=1433;DATABASE={DATABASE};UID={sql_username};PWD={sql_password}"
         )
-        engine = create_engine(connection_string)
-
-        # Testar conexão
-        try:
-            with engine.connect() as conn:
-                st.success("Conexão com o banco de dados estabelecida com sucesso!")
-        except Exception as ex:
-            st.error(f"Erro ao conectar no SQL Server: {ex}")
-            return pd.DataFrame()
-
-        # Executar consulta
         query = "SELECT * FROM BitcoinData ORDER BY timestamp DESC"
-        df = pd.read_sql(query, engine)
+        df = pd.read_sql(query, conn)
+        conn.close()
         return df
-    except Exception as ex:
-        st.error(f"Erro ao conectar ou executar consulta no SQL Server: {ex}")
+    except pyodbc.Error as ex:
+        st.error(f"Erro ao conectar no SQL Server: {ex}")
         return pd.DataFrame()
 
 # Função principal
 def main():
-    st.title("📊 Dashboard de Preços do Bitcoin")
+    st.set_page_config(page_title="Dashboard de Preços do Bitcoin", layout="wide")
+    st.title("Dashboard de Preços do Bitcoin")
     st.write("Este dashboard exibe os dados do preço do Bitcoin coletados periodicamente em um banco SQL Server.")
 
     df = ler_dados_sqlserver()
 
     if not df.empty:
-        st.subheader("📋 Dados Recentes")
+        st.subheader("Dados Recentes")
         st.dataframe(df)
 
         df['timestamp'] = pd.to_datetime(df['timestamp'])
         df = df.sort_values(by='timestamp')
 
-        st.subheader("📈 Evolução do Preço do Bitcoin")
+        st.subheader("Evolução do Preço do Bitcoin")
         st.line_chart(data=df, x='timestamp', y='valor', use_container_width=True)
 
-        st.subheader("🔢 Estatísticas Gerais")
+        st.subheader("Estatísticas Gerais")
         col1, col2, col3 = st.columns(3)
         col1.metric("Preço Atual", f"${df['valor'].iloc[-1]:,.2f}")
         col2.metric("Preço Máximo", f"${df['valor'].max():,.2f}")
