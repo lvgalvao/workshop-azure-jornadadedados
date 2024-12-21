@@ -20,6 +20,10 @@ Esquema do projeto: [app.excalidraw.com](https://link.excalidraw.com/l/8pvW6zbNU
 
 Para se inscrever: [workshop-azure](https://suajornadadedados.com.br/workshop-azure/)
 
+### Fabric
+
+[repositório](https://github.com/alanceloth/fabric-hello-world)
+
 ### Resumo
 Este workshop tem como objetivo fornecer uma introdução prática ao uso da Microsoft Azure, abordando desde a criação de contas e controle de custos até a implementação de serviços como Azure VMs, Azure Serverless e Azure Active Directory. Os participantes irão aprender a navegar na interface do Azure, criar e gerenciar recursos, além de desenvolver projetos práticos que envolvem ETL e aplicativos web escaláveis.
 
