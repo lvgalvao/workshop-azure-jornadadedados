@@ -54,15 +54,3 @@ Fornecer uma introdução prática ao uso da Microsoft Azure, capacitando os par
 
 ### Contexto de Aprendizado
 Introdução ao Azure e Cloud Computing, com foco em aplicações na área de dados. Revisão de conceitos anteriores para assegurar que os alunos estão preparados para absorver conteúdos novos e avançados.
-
-### Hello World
-
-### Storage
-
-#### blob storage
-
-##### parquet
-
-##### html.index
-
-### In
