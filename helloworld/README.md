@@ -86,10 +86,6 @@
 **Escolha da Região:**
 - Selecione a região mais próxima dos seus usuários ou que atenda aos requisitos específicos do projeto.
 
-## 9. Criando e Configurando uma Conta de Armazenamento
-
-Nesta seção, você aprenderá a criar e configurar uma **Storage Account** no Azure, armazenar arquivos, configurar permissões e servir um site estático.
-
 ### 9.1 Criando uma Conta de Armazenamento
 
 1. **Nome da Conta:**
